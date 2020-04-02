@@ -1,0 +1,75 @@
+const {app, BrowserWindow, globalShortcut} = require('electron')
+const { clipboard } = require('electron')
+const robot = require("robotjs");
+const Store = require('electron-store');
+const store = new Store();
+const { dialog } = require('electron')
+
+
+var antiAfk = false;
+let errorMessage = "Ha ocurrido un error, recomendamos abrir la aplicación como administrador.";
+
+function showShortcutError(){
+    dialog.showErrorBox("error", errorMessage);
+}
+module.exports = { 
+    registerShortcuts : function(){
+        //Codelock
+        globalShortcut.register('CommandOrControl+b', () => {
+            try {
+                robot.typeString(store.get('codelock')); 
+            } catch (error) {
+                showShortcutError();
+            }
+            
+        });
+        globalShortcut.register('CommandOrControl+l', () => {
+            try {
+                if(!antiAfk){
+                    antiAfk = setInterval(function(){ 
+                        robot.mouseClick("left");
+                        robot.setKeyboardDelay(100)
+                        robot.typeString("wasd");
+                        robot.keyTap("space");
+                        robot.keyTap("f1");
+                        robot.typeString("respawn");
+                        robot.keyTap("enter");
+                        robot.keyTap("f1");
+                        
+                    }, 30000);
+                }else{
+                    clearInterval(antiAfk);
+                    antiAfk = false; 
+                }
+            } catch (error) {
+                showShortcutError();
+            }
+        })
+        globalShortcut.register('CommandOrControl+o', () => {
+            try {
+                robot.setKeyboardDelay(15);
+                robot.keyTap("enter");
+                clipboard.writeText("AFK ON TOP", 'selección');
+                robot.keyTap("v", "control");
+                robot.keyTap("enter");
+            } catch (error) {
+                showShortcutError();
+            }
+
+
+        });
+        globalShortcut.register('CommandOrControl+k', () => {
+            try {
+                robot.setKeyboardDelay(15);
+                robot.keyTap("enter");
+                clipboard.writeText("Press f1 and write: quit grass false it removes the grass and gives you +30 fps", 'selección');
+                robot.keyTap("v", "control");
+                robot.keyTap("enter");
+            } catch (error) {
+                showShortcutError();
+            } 
+
+        });
+    }
+}
+
