@@ -25,7 +25,7 @@ module.exports = {
             
         });
         globalShortcut.register('CommandOrControl+l', () => {
-          //  try {
+            try {
                 if(!antiAfk){
                     for (const window of BrowserWindow.getAllWindows()) {
                            if (window.webContents) {
@@ -54,9 +54,9 @@ module.exports = {
                     clearInterval(antiAfk);
                     antiAfk = false;
                 }
-           /* } catch (error) {
+            } catch (error) {
                 showShortcutError();
-            }*/
+            }
         })
         globalShortcut.register('CommandOrControl+n', () => {
             var mouse = robot.getMousePos();

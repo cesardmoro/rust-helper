@@ -33,7 +33,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   //disable menu
-  //mainWindow.setMenu(null);
+  mainWindow.setMenu(null);
 
   // get the native HWND handle
   const handle = mainWindow.getNativeWindowHandle();

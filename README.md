@@ -17,3 +17,10 @@ Ahora el antiafk soporta autoconnect a los servidores, para eso elija servidor (
 * UPMONDAYS 147.135.8.54:56015
 * STEVIOUS LARGE 51.81.48.7:28015
 * STEVIOUS MONDAYS 147.135.30.171:28015
+
+
+Para buildear:
+
+`
+electron-builder build 
+`
