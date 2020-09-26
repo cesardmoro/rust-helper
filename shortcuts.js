@@ -7,6 +7,7 @@ const { dialog } = require('electron')
 
 
 var antiAfk = false;
+var spamConnect = false;
 let errorMessage = "Ha ocurrido un error, recomendamos abrir la aplicación como administrador.";
 
 function showShortcutError(){
@@ -26,7 +27,7 @@ module.exports = {
         globalShortcut.register('CommandOrControl+l', () => {
             try {
                 if(!antiAfk){
-                    antiAfk = setInterval(function(){ 
+                    antiAfk = setInterval(function(){  
                         robot.mouseClick("left");
                         robot.setKeyboardDelay(100)
                         robot.typeString("wasd");
@@ -40,6 +41,27 @@ module.exports = {
                 }else{
                     clearInterval(antiAfk);
                     antiAfk = false; 
+                }
+            } catch (error) {
+                showShortcutError();
+            }
+        })
+        globalShortcut.register('CommandOrControl+n', () => {
+            var mouse = robot.getMousePos();
+            robot.moveMouse(mouse.x, mouse.y-10);
+        });
+        globalShortcut.register('CommandOrControl+p', () => {
+            try {
+                if(!spamConnect){
+                    spamConnect = setInterval(function(){ 
+
+                        robot.keyTap("up");
+                        robot.keyTap("enter");
+                        
+                    }, 500);
+                }else{
+                    clearInterval(spamConnect);
+                    spamConnect = false; 
                 }
             } catch (error) {
                 showShortcutError();
@@ -70,6 +92,9 @@ module.exports = {
             } 
 
         });
+
+       
+        
     }
 }
 

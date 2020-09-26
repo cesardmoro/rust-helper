@@ -25,23 +25,39 @@
     "electron-builder": "^22.3.2"
   },
   "dependencies": {
+    "bootstrap": "^4.1.3",
     "electron-disable-minimize": "^2.0.2",
     "electron-reload": "^1.5.0",
     "electron-store": "^5.1.1",
-    "robotjs": "^0.6.0",
-    "bootstrap": "^4.1.3",
+    "iohook": "^0.6.5",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.4"
+    "node-abi": "^2.16.0",
+    "popper.js": "^1.14.4",
+    "robotjs": "^0.6.0"
   },
   "build": {
     "appId": "com.rust.helper.app",
     "win": {
       "target": "portable",
-      "icon":"./icons/win/icon.ico"
+      "icon": "./icons/win/icon.ico"
     },
     "portable": {
       "unicode": false,
       "artifactName": "rust-helper.exe"
     }
+  },
+  "iohook": {
+    "targets": [
+      "node-72",
+      "electron-76"
+    ],
+    "platforms": [
+      "win32",
+      "darwin"
+    ],
+    "arches": [
+      "x64",
+      "ia32"
+    ]
   }
 }
