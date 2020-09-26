@@ -20,7 +20,13 @@ document.getElementById('save-codelock').onclick = e => {
 function copiar($text){
     ipcRenderer.sendSync('copiar', $text);
 }
- 
+
+ipcRenderer.on('antiafk', (event, data) => {
+       document.getElementById('antiafk').innerText = data;
+       document.getElementById('antiafk').setAttribute('class', data);
+
+});
+
 
 var shell = require('electron').shell;
     //open links externally by default

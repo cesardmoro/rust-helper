@@ -7,7 +7,22 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
     <title>Rust Helper</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    
+    <style>
+      #antiafk.desactivado {
+          background: #ca0000;
+          float: right;
+          padding: 0px 10px;
+          border-radius: 7px;
+          color: #fff;
+      }
+      #antiafk.activado {
+          background: #03ca00;
+          float: right;
+          padding: 0px 10px;
+          border-radius: 7px;
+          color: #fff;
+      }
+    </style>
     <!-- Bootstrap Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script>let $ = require('jquery');</script>
@@ -20,7 +35,8 @@
     <div class="col-xs-12">
       Bienvenidos a rust helper version (<script>document.write(window.require('electron').remote.app.getVersion());</script> beta), espero que les sea de utilidad.<br>
 
-      Desarrollado por:&nbsp;<a class="external" href="https://github.com/cesardmoro">Cesar Daniel Moro (Birra)</a> Se aceptan comentarios a cesar.d.moro@gmail.com</a>
+      Desarrollado por:&nbsp;<a class="external" href="https://github.com/cesardmoro">Cesar Daniel Moro (Birra)</a> Se aceptan comentarios a cesar.d.moro@gmail.com</a><br>
+      Esten atentos a nuevas versiones en este link&nbsp;<a class="external" href="https://github.com/cesardmoro/rust-helper/releases">Rust helper releases</a>
   </div><br><br>
   <div class="col-6 ">
       <div class="form-group">
@@ -37,24 +53,29 @@
   </div>
 <br>
   <div class="col-12 row">
-  <div class="col-6 row ">
-    <h5 class="col-6 text-nowrap">Shortcuts</h5>
-    <ul>
+  <div class="col-6">
+    <h5 class="col-12 text-nowrap">Shortcuts</h5>
+    <ul class="col-12">
       <li class="mb-2">Ingresar Code Lock CTRL + B</li>
-      <li class="mb-2">AntiAFK CTRL + L</li>
+      <li class="mb-2">AntiAFK CTRL + L <div id="antiafk" class="desactivado">desactivado</div></li>
       <li class="mb-2">Write AFK ON TOP CTRL + o</li>
-      <li class="mb-2">Write QUIT GRASS</li>
+      <li class="mb-2">Write QUIT GRASS CTRL + k</li>
+      <li class="mb-2">Spam connect CTRL + SHIFT + p (Apretar f1, pegar el connect y esto automaticamente spamea arriba enter)</li>
 
     </ul>
   </div>
   <div class="col-6 ">
     <h5 class="col-6">Servers</h5>
-    <ul>
-      <li class="float-left w-100 mb-2">BRMAIN 177.54.150.18:28015        <button class="btn btn-secondary btn-sm float-right " onclick="copiar('direct.connect 177.54.150.18:28015')">Copiar</button></li>
-      <li class="float-left w-100 mb-2">BRLONG 177.54.150.117:28025 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('direct.connect 177.54.150.117:28025')">Copiar</button></li>
-      <li class="float-left w-100 mb-2">USMAIN 192.223.30.9:28070        <button class="btn btn-secondary btn-sm float-right " onclick="copiar('direct.connect 192.223.30.9:28070')">Copiar</button></li>
-      <li class="float-left w-100 mb-2">UPMONDAYS 147.135.8.54:56015 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('direct.connect 147.135.8.54:56015')">Copiar</button></li>
-      <li class="float-left w-100 mb-2">STEVIOUS 147.135.30.171:28015 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('direct.connect 147.135.30.171:28015')">Copiar</button></li>
+    <div class="col-12" class="text-sm">Ahora el antiafk soporta autoconnect a los servidores, para eso elija servidor (O copie client.connect) y luego al activar el antiafk lo mantendra connectado incluso si el servidor se cae. Ideal para Colas y timeouts</div>
+    <br>
+    <ul class="select-server">
+      <li class="float-left w-100 mb-2">BRMAIN 177.54.150.18:28015        <button class="btn btn-secondary btn-sm float-right " onclick="copiar('client.connect 177.54.150.18:28015')">Select</button></li>
+      <li class="float-left w-100 mb-2">BRLONG 177.54.150.117:28025 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('client.connect 177.54.150.117:28025')">Select</button></li>
+      <li class="float-left w-100 mb-2">USMAIN 192.223.30.9:28070        <button class="btn btn-secondary btn-sm float-right " onclick="copiar('client.connect 192.223.30.9:28070')">Select</button></li>
+      <li class="float-left w-100 mb-2">UPMONDAYS 147.135.8.54:56015 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('client.connect 147.135.8.54:56015')">Select</button></li>
+      <li class="float-left w-100 mb-2">STEVIOUS LARGE 51.81.48.7:28015 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('client.connect 51.81.48.7:28015')">Select</button></li>
+      <li class="float-left w-100 mb-2">STEVIOUS MONDAYS 147.135.30.171:28015 <button class="btn btn-secondary btn-sm float-right " onclick="copiar('client.connect 147.135.30.171:28015')">Select</button></li>
+
 
     </ul>
   </div>

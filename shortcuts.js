@@ -1,4 +1,4 @@
-const {app, BrowserWindow, globalShortcut} = require('electron')
+const {app,mainwindow, BrowserWindow, globalShortcut} = require('electron')
 const { clipboard } = require('electron')
 const robot = require("robotjs");
 const Store = require('electron-store');
@@ -25,9 +25,14 @@ module.exports = {
             
         });
         globalShortcut.register('CommandOrControl+l', () => {
-            try {
+          //  try {
                 if(!antiAfk){
-                    antiAfk = setInterval(function(){  
+                    for (const window of BrowserWindow.getAllWindows()) {
+                           if (window.webContents) {
+                               window.webContents.send('antiafk', 'activado');
+                           }
+                         }
+                    antiAfk = setInterval(function(){
                         robot.mouseClick("left");
                         robot.setKeyboardDelay(100)
                         robot.typeString("wasd");
@@ -35,22 +40,29 @@ module.exports = {
                         robot.keyTap("f1");
                         robot.typeString("respawn");
                         robot.keyTap("enter");
+                        robot.keyTap("v", "control");
+                        robot.keyTap("enter");
                         robot.keyTap("f1");
                         
                     }, 30000);
                 }else{
+                    for (const window of BrowserWindow.getAllWindows()) {
+                           if (window.webContents) {
+                               window.webContents.send('antiafk', 'desactivado');
+                           }
+                         }
                     clearInterval(antiAfk);
-                    antiAfk = false; 
+                    antiAfk = false;
                 }
-            } catch (error) {
+           /* } catch (error) {
                 showShortcutError();
-            }
+            }*/
         })
         globalShortcut.register('CommandOrControl+n', () => {
             var mouse = robot.getMousePos();
             robot.moveMouse(mouse.x, mouse.y-10);
         });
-        globalShortcut.register('CommandOrControl+p', () => {
+        globalShortcut.register('CommandOrControl+shift+p', () => {
             try {
                 if(!spamConnect){
                     spamConnect = setInterval(function(){ 
