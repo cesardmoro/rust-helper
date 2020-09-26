@@ -30,7 +30,7 @@
     "electron-reload": "^1.5.0",
     "electron-store": "^5.1.1",
     "iohook": "^0.6.5",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "node-abi": "^2.16.0",
     "popper.js": "^1.14.4",
     "robotjs": "^0.6.0"
